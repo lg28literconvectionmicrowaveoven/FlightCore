@@ -216,7 +216,7 @@ pub fn launch_northstar(
         let ns_profile_arg = format!("-profile={}", game_install.profile);
 
         let mut output = std::process::Command::new("C:\\Windows\\System32\\cmd.exe")
-            .args(["/C", "start", "", &ns_exe_path, &ns_profile_arg]).args(launch_options.cmd_args.split(" "))
+            .args(["/C", "start", "", &ns_exe_path, &ns_profile_arg]).args(launch_options.cmd_args.split(" ").map(|a| a.trim()))
             .spawn()
             .expect("failed to execute process");
         output.wait().expect("failed waiting on child process");
